@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const connectEnsureLogin = require('connect-ensure-login')
 const Comment = require('../models/comment')
+const Post = require('../models/post')
 
 // TEMPORARY
 // Json payload of all comments that belong to :post_id
@@ -21,12 +22,26 @@ connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   } else {
     const newComment = new Comment()
     newComment.text = req.body.text
-    newComment.user = req.user._id
+    newComment.user = req.user.username
     newComment.post = req.params.post_id
     newComment.date = new Date()  
-    newComment.save((err, product) => {
+    newComment.save((err, savedComment) => {
       if (err) { res.send(err) }
-      res.redirect('/posts/' + req.params.post_id)
+      // Update the user and post models with the new comment id
+      req.user.comments.push(savedComment._id)
+      req.user.save((err2, updatedUser) => {
+        if (err2) { send.send(err2) }
+        console.log(updatedUser)
+        Post.findById(req.params.post_id, (err3, post) => {
+          if (err3) { res.send(err3) }
+          post.comments.push(savedComment._id)
+          post.save((err4, updatedPost) => {
+            if (err4) { res.send(err4) }
+            console.log(updatedPost)
+            res.redirect('/posts/' + updatedPost._id)
+          })
+        })
+      })
     })
   }
 })

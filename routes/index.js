@@ -13,20 +13,31 @@ router.get('/signup', (req, res) => {
 })
 
 router.post('/signup', (req, res) => {
-  // check if a user with this email already exists
-  User.findOne({ email: req.body.email }, (err, user) => {
+  // check if any of the fields are empty
+  if (!req.body.username || !req.body.password || !req.body.email) {
+    res.redirect('/signup')
+  }
+  // check if a user with this username already exists
+  User.findOne({ username: req.body.username }, (err, user) => {
     if (user) {
       res.redirect('/signup')
     } else {
-      const newUser = new User()
-      newUser.email = req.body.email
-      newUser.generateHash(req.body.password, (hash) => {
-        newUser.password = hash
-        newUser.save((err) => {
-          if (err) { res.send(err) }
-          res.redirect('/')
-        })
-      }) 
+      User.findOne({ email: req.body.email }, (err2, user2) => {
+        if (user2) {
+          res.redirect('/signup')
+        }
+
+        const newUser = new User()
+        newUser.username = req.body.username
+        newUser.email = req.body.email
+        newUser.generateHash(req.body.password, (hash) => {
+          newUser.password = hash
+          newUser.save((err) => {
+            if (err) { res.send(err) }
+            res.redirect('/')
+          })
+        }) 
+      })
     }
   })
 })
@@ -48,11 +59,6 @@ router.get('/logout', (req, res) => {
 router.get('/submit',
   connectEnsurelogin.ensureLoggedIn(), (req, res) => {
     res.render('submit', { user: req.user })
-})
-
-router.get('/profile', 
-  connectEnsurelogin.ensureLoggedIn(), (req, res) => {
-    res.render('profile', { user: req.user })
 })
 
 module.exports = router

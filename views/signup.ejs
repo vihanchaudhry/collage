@@ -14,7 +14,7 @@
     	<a href="/signup">Sign up</a>
 		<% } else { %>
 			<a href="/submit">Submit a post</a>
-    	<a href="/profile">View profile</a>
+    	<a href="/users/<%= user.username %>">View profile</a>
     	<a href="/logout">Logout</a>
 		<% } %>
   </header>
@@ -22,12 +22,16 @@
   <h3>Signup</h3>
   <form action="/signup" method="post">
     <div>
-      <label>Email</label>
-      <input type="text" name="email"><br/>
+      <label>Username</label>
+      <input type="text" name="username"><br/>
     </div>
     <div>
       <label>Password</label>
       <input type="password" name="password">
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="text" name="email"><br/>
     </div>
     <button type="submit">Register</button>
   </form>

@@ -5,6 +5,7 @@ const postSchema = mongoose.Schema({
   link: String,
   text: String,
   user: String,
+  comments: [ String ],
   date: Date
 })
 

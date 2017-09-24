@@ -14,7 +14,7 @@
     	<a href="/signup">Sign up</a>
 		<% } else { %>
 			<a href="/submit">Submit a post</a>
-    	<a href="/profile">View profile</a>
+    	<a href="/users/<%= user.username %>">View profile</a>
     	<a href="/logout">Logout</a>
 		<% } %>
   </header>
@@ -25,7 +25,7 @@
     <a href="<%= post.link %>" target="_blank">Link</a>
   <% } %>
 
-  <h3>Submitted on <%= post.date %> by <%= user.email %></h3>
+  <h3>Submitted on <%= post.date %> by <a href="/users/<%= user.username %>"><%= user.username %></a></h3>
 
   <% if (post.text) { %>
     <p><%= post.text %></p>
@@ -35,7 +35,11 @@
 
   <% for (var i = 0; i < comments.length; i++) { %>
     <p>
-      <strong><%= comments[i].user %></strong> writes: <br/>
+      <strong>
+        <a href="/users/<%= comments[i].user %>">
+          <%= comments[i].user %>
+        </a>
+      </strong> writes: <br/>
       > <%= comments[i].text %>
     </p>
   <% } %>

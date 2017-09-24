@@ -14,7 +14,7 @@
     	<a href="/signup">Sign up</a>
 		<% } else { %>
 			<a href="/submit">Submit a post</a>
-    	<a href="/profile">View profile</a>
+    	<a href="/users/<%= user.username %>">View profile</a>
     	<a href="/logout">Logout</a>
 		<% } %>
   </header>

@@ -19,7 +19,7 @@ router.post('/',
     if (!req.body.title) { res.redirect('/submit') }
     const newPost = new Post()
     newPost.title = req.body.title
-    newPost.user = req.user._id
+    newPost.user = req.user.username
     newPost.link = req.body.link
     newPost.text = req.body.text
     newPost.date = new Date()
@@ -29,9 +29,15 @@ router.post('/',
     } else if (!newPost.link && !newPost.text) { 
       res.redirect('/submit') 
     } else {
-      newPost.save((err, product) => {
+      newPost.save((err, savedPost) => {
         if (err) { res.send(err) }
-        res.redirect('/posts/' + product._id)
+        // Update the user model with the new post id
+        req.user.posts.push(savedPost._id)
+        req.user.save((err2, updatedUser) => {
+          if (err2) { res.send(err2) }
+          console.log(updatedUser)
+          res.redirect('/posts/' + savedPost._id)
+        })
       })
     }
 })
@@ -40,7 +46,7 @@ router.post('/',
 router.get('/:post_id', (req, res) => {
   Post.findById(req.params.post_id, (err, post) => {
     if (err) { res.send(err) }
-    User.findById(post.user, (err2, user) => {
+    User.findOne({ username: post.user }, (err2, user) => {
       if (err2) { res.send(err2) }
       Comment.find({ post: req.params.post_id }, (err3, comments) => {
         if (err3) { res.send(err3) }
