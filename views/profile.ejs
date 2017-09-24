@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf8">
+  <title>mongo-test</title>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<header>
+    <a id="home-btn" href="/">Collage</a>
+		<% if (!user) { %>
+			<a href="/login">Login</a>
+    	<a href="/signup">Sign up</a>
+		<% } else { %>
+			<a href="/submit">Submit a post</a>
+    	<a href="/profile">View profile</a>
+    	<a href="/logout">Logout</a>
+		<% } %>
+  </header>
+
+  <p>Email: <%= user.email %></p>
+</body>
+</html>
