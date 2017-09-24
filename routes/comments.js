@@ -31,13 +31,11 @@ connectEnsureLogin.ensureLoggedIn(), (req, res) => {
       req.user.comments.push(savedComment._id)
       req.user.save((err2, updatedUser) => {
         if (err2) { send.send(err2) }
-        console.log(updatedUser)
         Post.findById(req.params.post_id, (err3, post) => {
           if (err3) { res.send(err3) }
           post.comments.push(savedComment._id)
           post.save((err4, updatedPost) => {
             if (err4) { res.send(err4) }
-            console.log(updatedPost)
             res.redirect('/posts/' + updatedPost._id)
           })
         })

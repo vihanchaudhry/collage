@@ -35,7 +35,6 @@ router.post('/',
         req.user.posts.push(savedPost._id)
         req.user.save((err2, updatedUser) => {
           if (err2) { res.send(err2) }
-          console.log(updatedUser)
           res.redirect('/posts/' + savedPost._id)
         })
       })
