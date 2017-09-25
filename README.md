@@ -1,6 +1,6 @@
 # collage
 
-I don't really know what this is going to be yet.
+I don't really know where this is going just yet.
 
 ## Quickstart
 
