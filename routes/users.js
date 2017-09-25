@@ -24,8 +24,8 @@ router.get('/:username',
       if (err) { res.send(err) }
       // Get all posts made by the user
       Post.find({ user: user.username }, (err2, posts) => {
-        console.log(posts)
         if (err2) { res.send(err2) }
+        posts.reverse()
         res.render('user', { user: user, posts: posts }) 
       })
     })
