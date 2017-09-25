@@ -31,7 +31,11 @@
     <p><%= post.text %></p>
   <% } %>
 
-  <h2>Comments</h2>
+  <h2>Comments 
+    <% if (comments.length > 0) { %>
+      <%= '(' + comments.length + ')' %>
+    <% } %>
+  </h2>
 
   <% for (var i = 0; i < comments.length; i++) { %>
     <p>

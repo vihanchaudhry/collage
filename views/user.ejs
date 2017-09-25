@@ -23,7 +23,7 @@
 
 	<% for (var i = 0; i < posts.length; i++) { %>
 		<div class="post">
-			<a href="/posts/<%= posts[i]._id %>" target="_blank">
+			<a href="/posts/<%= posts[i]._id %>">
 				<h3><%= posts[i].title %></h3>
 			</a>
 
@@ -36,6 +36,13 @@
 			<% if (posts[i].text) { %>
 				<p><%= posts[i].text %></p>
 			<% } %>
+
+			<a href="/posts/<%= posts[i]._id %>"> 
+				comments
+				<% if (posts[i].comments.length > 0) { %>
+      		<%= '(' + posts[i].comments.length + ')' %>
+    		<% } %>
+			</a>
 		</div>
   <% } %>
 </body>
