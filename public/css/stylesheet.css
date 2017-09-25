@@ -6,6 +6,15 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 #home-btn {
   font-size: 22px;
+}
+
+.post {
+  margin-bottom: 36px;
+  border: 1px solid #afafaf
 }

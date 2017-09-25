@@ -20,5 +20,23 @@
   </header>
 
   <h1><%= user.username %></h1>
+
+	<% for (var i = 0; i < posts.length; i++) { %>
+		<div class="post">
+			<a href="/posts/<%= posts[i]._id %>" target="_blank">
+				<h3><%= posts[i].title %></h3>
+			</a>
+
+			<% if (posts[i].link) { %>
+				<a href="<%= posts[i].link %>" target="_blank">Link</a>
+			<% } %>
+
+			<h4>Submitted on <%= posts[i].date %> by <a href="/users/<%= posts[i].user %>"><%= posts[i].user %></a></h3>
+
+			<% if (posts[i].text) { %>
+				<p><%= posts[i].text %></p>
+			<% } %>
+		</div>
+  <% } %>
 </body>
 </html>
