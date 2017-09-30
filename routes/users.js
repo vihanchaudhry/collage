@@ -5,30 +5,18 @@ const Post = require('../models/post')
 
 // TEMPORARY
 // Json payload of all users
-router.get('/', (req, res) => {
-  User.find((err, users) => {
-    res.json({ users: users })
-  })
+router.get('/', async (req, res) => {
+  const users = await User.find()
+  res.json(users)
 })
 
-// router.get('/:user_id', (req, res) => {
-//   User.findById(req.params.user_id, (err, user) => {
-//     if (err) { res.send(err) }
-//     res.json(user)
-//   })
-// })
-
 router.get('/:username', 
-  (req, res) => {
-    User.findOne({ username: req.params.username }, (err, user) => {
-      if (err) { res.send(err) }
-      // Get all posts made by the user
-      Post.find({ user: user.username }, (err2, posts) => {
-        if (err2) { res.send(err2) }
-        posts.reverse()
-        res.render('user', { user: user, posts: posts }) 
-      })
-    })
+  async (req, res) => {
+    const user = await User.findOne({ username: req.params.username })
+    const posts = await Post.find({ user: user.username })
+    posts.reverse()  // lists posts by newest first
+    console.log(posts)
+    res.render('user', { user, posts }) 
   }
 )
 

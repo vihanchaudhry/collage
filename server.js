@@ -14,15 +14,13 @@ const comments = require('./routes/comments')
 mongoose.connect('mongodb://localhost:27017/db', { useMongoClient: true, promiseLibrary: global.Promise })
 
 // Configure the local strategy for use by Passport.
-passport.use(new LocalStrategy((username, password, callback) => {
-  User.findOne({ username: username }, (err, user) => {
-    if (err) { return callback(err, null) }
+passport.use(new LocalStrategy(async (username, password, callback) => {
+  const user = await User.findOne({ username: username })
     if (!user) { return callback(null, false) }
     user.validPassword(password, (result => {
       if (!result) { return callback(null, false) }
       return callback(null, user)      
     }))
-  })
 }))
 
 // Configure Passport authenticated session persistence.

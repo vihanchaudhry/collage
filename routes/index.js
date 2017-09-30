@@ -12,33 +12,30 @@ router.get('/signup', (req, res) => {
   res.render('signup', { user: null })
 })
 
-router.post('/signup', (req, res) => {
+router.post('/signup', async (req, res) => {
   // check if any of the fields are empty
   if (!req.body.username || !req.body.password || !req.body.email) {
     res.redirect('/signup')
   }
-  // check if a user with this username already exists
-  User.findOne({ username: req.body.username }, (err, user) => {
-    if (user) {
-      res.redirect('/signup')
-    } else {
-      User.findOne({ email: req.body.email }, (err2, user2) => {
-        if (user2) {
-          res.redirect('/signup')
-        }
 
-        const newUser = new User()
-        newUser.username = req.body.username
-        newUser.email = req.body.email
-        newUser.generateHash(req.body.password, (hash) => {
-          newUser.password = hash
-          newUser.save((err) => {
-            if (err) { res.send(err) }
-            res.redirect('/')
-          })
-        }) 
-      })
-    }
+  // check if a user with this username already exists
+  const userFromUsername = await User.findOne({ username: req.body.username })
+  if (userFromUsername) {
+    res.redirect('/signup')
+  }
+
+  // check if a user with this email already exists
+  const userFromEmail = await User.findOne({ email: req.body.email })
+  if (userFromEmail) {
+    res.redirect('/signup')
+  }
+  const newUser = new User()    
+  newUser.generateHash(req.body.password, async (hash) => {
+    newUser.username = req.body.username
+    newUser.email = req.body.email
+    newUser.password = hash
+    await newUser.save()
+    res.redirect('/')
   })
 })
 

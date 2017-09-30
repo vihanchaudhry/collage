@@ -7,15 +7,14 @@ const User = require('../models/user')
 
 // TEMPORARY
 // Json payload of all posts
-router.get('/', (req, res) => {
-  Post.find((err, posts) => {
-    res.json({ posts: posts })
-  })
+router.get('/', async (req, res) => {
+  const posts = await Post.find()
+  res.json({ posts })
 })
 
 // Create a post
 router.post('/', 
-  connectEnsureLogin.ensureLoggedIn(), (req, res) => {
+  connectEnsureLogin.ensureLoggedIn(), async (req, res) => {
     if (!req.body.title) { res.redirect('/submit') }
     const newPost = new Post()
     newPost.title = req.body.title
@@ -29,30 +28,20 @@ router.post('/',
     } else if (!newPost.link && !newPost.text) { 
       res.redirect('/submit') 
     } else {
-      newPost.save((err, savedPost) => {
-        if (err) { res.send(err) }
-        // Update the user model with the new post id
-        req.user.posts.push(savedPost._id)
-        req.user.save((err2, updatedUser) => {
-          if (err2) { res.send(err2) }
-          res.redirect('/posts/' + savedPost._id)
-        })
-      })
+      const savedPost = await newPost.save()
+      // Update the user model with the new post id
+      req.user.posts.push(savedPost._id)
+      const updatedUser = await req.user.save()
+      res.redirect('/posts/' + savedPost._id)
     }
 })
 
 // Show post
-router.get('/:post_id', (req, res) => {
-  Post.findById(req.params.post_id, (err, post) => {
-    if (err) { res.send(err) }
-    User.findOne({ username: post.user }, (err2, user) => {
-      if (err2) { res.send(err2) }
-      Comment.find({ post: req.params.post_id }, (err3, comments) => {
-        if (err3) { res.send(err3) }
-        res.render('post', { comments: comments, post: post, user: user })
-      })
-    })
-  })
+router.get('/:post_id', async (req, res) => {
+  const post = await Post.findById(req.params.post_id)
+  const user = await User.findOne({ username: post.user })
+  const comments = await Comment.find({ post: req.params.post_id })
+  res.render('post', { comments, post, user })
 })
 
 // Delete post
