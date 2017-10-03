@@ -5,7 +5,7 @@ const User = require('../models/user')
 const connectEnsurelogin = require('connect-ensure-login')
 
 router.get('/', (req, res) => {
-  res.render('index', { user: req.user })
+  res.render('home', { user: req.user })
 })
 
 router.get('/signup', (req, res) => {
@@ -29,6 +29,7 @@ router.post('/signup', async (req, res) => {
   if (userFromEmail) {
     res.redirect('/signup')
   }
+
   const newUser = new User()    
   newUser.generateHash(req.body.password, async (hash) => {
     newUser.username = req.body.username
@@ -46,6 +47,19 @@ router.get('/login', (req, res) => {
 router.post('/login',
   passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
     res.redirect('/')
+})
+
+router.get('/auth/facebook', 
+  passport.authenticate('facebook', 
+  { scope: [ 'email' ] })
+)
+
+router.get('/auth/facebook/callback', 
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  (req, res) => {
+    console.log("CALLBACK")
+    // Successful authentication, redirect home.
+    res.redirect('/');
 })
 
 router.get('/logout', (req, res) => {
