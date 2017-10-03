@@ -11,6 +11,7 @@ a:hover {
 }
 
 #home-btn {
+  display: inline-block;
   font-size: 22px;
 }
 

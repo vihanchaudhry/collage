@@ -24,16 +24,16 @@ connectEnsureLogin.ensureLoggedIn(), async (req, res) => {
     newComment.user = req.user.username
     newComment.post = req.params.post_id
     newComment.date = new Date()
-
     const savedComment = await newComment.save()
+
     // Update the user with the new comment id
     req.user.comments.push(savedComment._id)
     const updatedUser = await req.user.save()
     const post = await Post.findById(req.params.post_id)
+
     // Update the post with the new comment id
     post.comments.push(savedComment._id)
     const updatedPost = await post.save()
-    console.log("DONE")
     res.redirect('/posts/' + updatedPost._id)
   }
 })

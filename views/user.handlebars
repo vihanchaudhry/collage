@@ -1,0 +1,26 @@
+<h3>{{user.username}}</h3>
+
+{{#each posts}}
+	<div class="post">
+		<a href="/posts/{{_id}}">
+			<h4>{{title}}</h4>
+		</a>
+
+		{{#if link}}
+			<a href="{{link}}" target="_blank">Link</a>
+		{{/if}}
+
+		<h6>Submitted on {{date}} by <a href="/users/{{user}}">{{user}}</a></h6>
+
+		{{#if text}}
+			<p>{{text}}</p>
+		{{/if}}
+
+		<a href="/posts/{{_id}}"> 
+			comments
+			{{#if comments}}
+				({{comments.length}})
+			{{/if}}
+		</a>
+	</div>
+{{/each}}

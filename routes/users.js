@@ -15,7 +15,6 @@ router.get('/:username',
     const user = await User.findOne({ username: req.params.username })
     const posts = await Post.find({ user: user.username })
     posts.reverse()  // lists posts by newest first
-    console.log(posts)
     res.render('user', { user, posts }) 
   }
 )

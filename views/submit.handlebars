@@ -1,0 +1,19 @@
+<h3>Submit a post</h3>
+
+<p>You must either specify a link or input some text in the text box (or both!)</p>
+
+<form action="/posts" method="post">
+  <div>
+    <label>Title</label>
+    <input type="text" name="title" placeholder="Foobar!"><br/>
+  </div>
+  <div>
+    <label>Link</label>
+    <input type="text" name="link" placeholder="https://i.imgur.com/dLTPcWs.jpg">
+  </div>
+  <div>
+    <label>Text</label>
+    <textarea rows="4" name="text" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></textarea>
+  </div>
+  <button type="submit">Submit</button>
+</form>

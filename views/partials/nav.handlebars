@@ -1,0 +1,12 @@
+<header>
+  <h1 id="home-btn"><a href="/">Collage</a></h1>
+
+  {{#if user}}
+    <a href="/submit">Submit a post</a>
+    <a href="/users/{{user.username}}">View profile</a>
+    <a href="/logout">Logout</a>
+  {{else}}
+    <a href="/login">Login</a>
+    <a href="/signup">Sign up</a>
+  {{/if}}
+</header>

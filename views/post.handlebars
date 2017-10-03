@@ -1,0 +1,36 @@
+<h3>{{post.title}}</h3>
+
+{{#if post.link}}
+  <a href="{{post.link}}" target="_blank">Link</a>
+{{/if}}
+
+<h6>Submitted on {{post.date}} by <a href="/users/{{user.username}}">{{user.username}}</a></h6>
+
+{{#if post.text}}
+  <p>{{post.text}}</p>
+{{/if}}
+
+<h4>Comments 
+  {{#if comments.length}}
+    ({{comments.length}})
+  {{/if}}
+</h4>
+
+{{#each comments}}
+  <p>
+    <strong>
+      <a href="/users/{{user}}">
+        {{user}}
+      </a>
+    </strong> writes: <br/>
+    > {{text}}
+  </p>
+{{/each}}
+
+{{#if user}}
+  <form action="/posts/{{post._id}}/comments" method="post">
+    <label>Leave a comment</label><br/>
+    <textarea rows="4" name="text"></textarea><br/>
+    <button type="submit">Post</button>
+  </form>
+{{/if}}
