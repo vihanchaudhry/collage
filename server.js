@@ -1,5 +1,5 @@
 const express = require('express')
-const exphbs  = require('express-handlebars');
+const exphbs  = require('express-handlebars')
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -58,7 +58,7 @@ app.engine('handlebars', exphbs({
   defaultLayout: 'main',
   partialsDir: [ 'views/partials/' ]
 }))
-app.set('view engine', 'handlebars');
+app.set('view engine', 'handlebars')
 
 // Serve static files from public/
 app.use(express.static('public'))

@@ -59,7 +59,7 @@ router.get('/auth/facebook/callback',
   (req, res) => {
     console.log("CALLBACK")
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/')
 })
 
 router.get('/logout', (req, res) => {

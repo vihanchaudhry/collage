@@ -1,12 +1,14 @@
-<header>
+<div id="nav">
   <h1 id="home-btn"><a href="/">Collage</a></h1>
 
-  {{#if user}}
-    <a href="/submit">Submit a post</a>
-    <a href="/users/{{user.username}}">View profile</a>
-    <a href="/logout">Logout</a>
-  {{else}}
-    <a href="/login">Login</a>
-    <a href="/signup">Sign up</a>
-  {{/if}}
-</header>
+  <ul id="nav-ul">
+    {{#if user}}
+      <li><a href="/submit">Submit a post</a></li>
+      <li><a href="/users/{{user.username}}">{{user.username}}</a></li>
+      <li><a href="/logout">Logout</a></li>
+    {{else}}
+      <li><a href="/login">Login</a></li>
+      <li><a href="/signup">Sign up</a></li>
+    {{/if}}
+  </ul>
+</div>

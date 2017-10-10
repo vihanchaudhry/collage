@@ -11,8 +11,28 @@ a:hover {
 }
 
 #home-btn {
-  display: inline-block;
+  display: inline;
   font-size: 22px;
+  flex: 1;
+}
+
+#nav {
+  display: flex;
+}
+
+#nav-ul {
+  /* stuff */
+}
+
+#nav-ul li {
+  display: inline;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
 }
 
 .post {
