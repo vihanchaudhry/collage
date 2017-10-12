@@ -1,5 +1,10 @@
 body {
   font-family: "Trebuchet MS", Arial, sans-serif;
+  margin: 0 auto;
+}
+
+input:focus {
+  outline: none;
 }
 
 a {
@@ -14,10 +19,12 @@ a:hover {
   display: inline;
   font-size: 22px;
   flex: 1;
+  padding: 0 10px;
 }
 
 #nav {
   display: flex;
+  box-shadow: 0 0 2px rgba(0,0,0,0.33)
 }
 
 #nav-ul {
@@ -33,9 +40,50 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   /* align-items: center; */
+  flex-grow: 1;
+  margin: 0 auto;
+  max-width: 600px;
 }
 
 .post {
-  margin-bottom: 36px;
-  border: 1px solid #afafaf
+  margin-bottom: 36px;  
+}
+
+.post-content {
+  /* margin-bottom: 36px; */
+  border: 1px solid #e5e5e5;
+}
+
+.post-title {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.post-comments {
+  border: 1px solid #e5e5e5;
+  border-top: none;
+}
+
+.post-addcomment form {
+  border: 1px solid #e5e5e5;
+  border-top: none;
+  display: flex;
+  padding: 12px;
+}
+
+#comment-input {
+  flex: 1;
+  display: flex;
+}
+
+#comment-input input {
+  flex: 1;
+  border: none;
+  padding: 0;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 14px;  
+}
+
+#comment-submit {
+  align-self: flex-end;
+  flex-basis: auto;
 }
