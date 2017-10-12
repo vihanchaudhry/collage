@@ -2,16 +2,18 @@
   <section class="post-content">
     <div class="post-title">
       <h3>{{post.title}}</h3>
+
+      {{#if post.link}}
+        <div class="post-link">[<a href="{{post.link}}" target="_blank">link</a>]</div>
+      {{/if}}
+
+      <h6>Submitted on {{post.date}} by <a href="/users/{{user.username}}">{{user.username}}</a></h6>
     </div>
 
-    {{#if post.link}}
-      <a href="{{post.link}}" target="_blank">Link</a>
-    {{/if}}
-
-    <h6>Submitted on {{post.date}} by <a href="/users/{{user.username}}">{{user.username}}</a></h6>
-
     {{#if post.text}}
-      <p>{{post.text}}</p>
+      <div class="post-text">
+        <p>{{post.text}}</p>
+      </div>
     {{/if}}
   </section>
 

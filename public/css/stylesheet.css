@@ -27,10 +27,6 @@ a:hover {
   box-shadow: 0 0 2px rgba(0,0,0,0.33)
 }
 
-#nav-ul {
-  /* stuff */
-}
-
 #nav-ul li {
   display: inline;
 }
@@ -39,7 +35,6 @@ a:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
   flex-grow: 1;
   margin: 0 auto;
   max-width: 600px;
@@ -50,27 +45,46 @@ a:hover {
 }
 
 .post-content {
-  /* margin-bottom: 36px; */
   border: 1px solid #e5e5e5;
 }
 
 .post-title {
+  padding: 0 12px;
   border-bottom: 1px solid #e5e5e5;
 }
 
+.post-title h3 {
+  display: inline-block;
+}
+
+.post-link {
+  display: inline;
+  padding: 6px;
+}
+
+.post-title h6 {
+  margin: 0 auto 8px;
+}
+
+.post-text {
+  padding: 0 8px;
+}
+
 .post-comments {
+  padding: 0 12px;
   border: 1px solid #e5e5e5;
   border-top: none;
 }
 
 .post-addcomment form {
+  padding: 0 12px;
   border: 1px solid #e5e5e5;
   border-top: none;
   display: flex;
-  padding: 12px;
 }
 
 #comment-input {
+  padding: 12px 0;
   flex: 1;
   display: flex;
 }
@@ -84,6 +98,8 @@ a:hover {
 }
 
 #comment-submit {
+  display: flex;
   align-self: flex-end;
   flex-basis: auto;
+  height: 40px;
 }
