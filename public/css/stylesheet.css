@@ -76,6 +76,15 @@ a:hover {
   border-top: none;
 }
 
+.post-comments p {
+  margin: 0 auto;
+  padding-top: 12px;
+}
+
+.post-comments p:last-child {
+  padding-bottom: 12px;
+}
+
 .post-addcomment form {
   padding-left: 12px;
   border: 1px solid #e5e5e5;
